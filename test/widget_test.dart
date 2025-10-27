@@ -8,7 +8,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+<<<<<<< HEAD
 import 'package:milestone1/main.dart';
+=======
+import 'package:fitness_tracking_app/main.dart';
+>>>>>>> fe0a9a2 (Milestone 2)
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

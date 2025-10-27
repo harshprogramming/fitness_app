@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # milestone1
+=======
+# fitness_tracking_app
+>>>>>>> fe0a9a2 (Milestone 2)
 
 A new Flutter project.
 

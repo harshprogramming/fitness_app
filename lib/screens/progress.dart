@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import 'package:flutter/material.dart';
 import '../state/app_scope.dart';
@@ -22,6 +23,49 @@ class ProgressScreen extends StatelessWidget{
         const SizedBox(height:8),
         SimpleBarChart(values: calories, labels: labels),
       ]),
+=======
+import 'package:flutter/material.dart';
+import '../state/app_scope.dart';
+import '../widgets/simple_chart.dart';
+
+class ProgressScreen extends StatelessWidget {
+  const ProgressScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final app = AppScope.of(context);
+    return Scaffold(
+      appBar: AppBar(title: const Text('Progress')),
+      body: FutureBuilder<List<dynamic>>(
+        future: Future.wait([
+          app.repo.workoutsPerLastNDays(7),
+          app.repo.caloriesForLastNDays(7),
+        ]),
+        builder: (context, snap) {
+          if (!snap.hasData) return const Center(child: CircularProgressIndicator());
+          final workouts = (snap.data![0] as List<double>);
+          final calories = (snap.data![1] as List<int>).map((e) => e.toDouble()).toList();
+          final now = DateTime.now();
+          final labels = List<String>.generate(7, (i) {
+            final d = now.subtract(Duration(days: 6 - i));
+            return '${d.month}/${d.day}';
+          });
+
+          return ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              Text('Workouts per day (last 7 days)', style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 8),
+              SimpleBarChart(values: workouts, labels: labels),
+              const SizedBox(height: 16),
+              Text('Calories per day (last 7 days)', style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 8),
+              SimpleBarChart(values: calories, labels: labels),
+            ],
+          );
+        },
+      ),
+>>>>>>> fe0a9a2 (Milestone 2)
     );
   }
 }
